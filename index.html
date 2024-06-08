@@ -23,7 +23,6 @@ background-color: #f2f2f2;
 <body>
 <h1>滝地下麻雀順位表</h1>
 <script type="text/javascript">
-<!--
 var day = new Date(document.lastModified);
 var y = day.getFullYear();
 var m = day.getMonth() + 1;
@@ -36,7 +35,6 @@ if (m < 10) m = "0" + m;            // 数値が1～9の時には
 if (d < 10) d = "0" + d;            // 0 を追加してそろえる
 
 document.write("更新日: " + y + "/" + m + "/" + d);
-// -->
 </script>
 <table id="rankings">
 <tr>
@@ -62,10 +60,10 @@ function generateRankings() {
     .then(data => {
         // データを改行で分割し、各行を処理
         data.trim().split('\n').map(line => {
-            var [name, rate, gosa] = line.split(':');
-            rate = parseInt(rate);
-            gosa = parseInt(gosa);
-            return { name, rate, gosa: gosa - rate };
+            var [name, zenkai, konkai] = line.split(':');
+            let rate = parseInt(konkai);
+            let gosa = parseInt(zenkai);
+            return { name, rate, gosa: rate - gosa };
         }).sort((a, b) => b.rate - a.rate) // レートで降順ソート
         .forEach((item, index) => {
             var rank = index + 1;
