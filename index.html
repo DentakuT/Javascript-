@@ -43,6 +43,7 @@ document.write("更新日: " + y + "/" + m + "/" + d);
 <th>順位</th>
 <th>名前</th>
 <th>レート</th>
+<th>増減</th>
 </tr>
 </table>
 
@@ -61,8 +62,8 @@ fetch(dataFile)
 .then(data => {
 // データを改行で分割し、各行を処理
 data.trim().split('\n').map(line => {
-var [name, rate] = line.split(':');
-return { name, rate: parseInt(rate) };
+var [name, rate, gosa] = line.split(':');
+return { name, rate: parseInt(rate), gosa: perseInt(gosa) };
 }).sort((a, b) => b.rate - a.rate) // レートで降順ソート
 .forEach((item, index) => {
 var rank = index + 1;
@@ -72,6 +73,7 @@ var row = table.insertRow();
 row.insertCell(0).textContent = rank;
 row.insertCell(1).textContent = item.name;
 row.insertCell(2).textContent = item.rate;
+row.insertCell(3).textContent = item.gosa;
 });
 });
 }
