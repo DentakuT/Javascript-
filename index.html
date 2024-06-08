@@ -63,7 +63,7 @@ fetch(dataFile)
 // データを改行で分割し、各行を処理
 data.trim().split('\n').map(line => {
 var [name, rate, gosa] = line.split(':');
-return { name, rate: parseInt(rate), gosa: perseInt(gosa) };
+return { name, rate: parseInt(rate), gosa: parseInt(gosa) };
 }).sort((a, b) => b.rate - a.rate) // レートで降順ソート
 .forEach((item, index) => {
 var rank = index + 1;
