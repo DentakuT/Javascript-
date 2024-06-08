@@ -73,7 +73,10 @@ function generateRankings() {
             row.insertCell(0).textContent = rank;
             row.insertCell(1).textContent = item.name;
             row.insertCell(2).textContent = item.rate;
-            row.insertCell(3).textContent = item.gosa;
+            
+            // gosaの値が正なら + を追加
+            let gosaDisplay = item.gosa > 0 ? "+" + item.gosa : item.gosa;
+            row.insertCell(3).textContent = gosaDisplay;
         });
     });
 }
